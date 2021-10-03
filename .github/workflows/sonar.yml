@@ -1,0 +1,40 @@
+name: Sonar-Workflow
+
+on:
+  push:
+   branches: [ master, sonar.yml, quality-gate ]
+  pull_request:
+    branches: [ master]
+    types: [opened]  
+
+jobs:
+ sonarQubeTrigger:
+    name: SonarQube Trigger
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONAR_HOST }}
+        login: ${{ secrets.SONAR_KEY }}
+        projectKey: Test-automation-sample
+        projectName: Test-automation-sample
+
+    - name: 'Checkout repository on branch: ${{ github.REF }}'
+      uses: actions/checkout@v2
+      with:
+          ref: ${{ github.HEAD_REF }}    
+          
+    - name: Run an analysis of the PR
+      uses: actions/checkout@v2
+
+      with:
+        host: ${{ secrets.SONAR_HOST }}
+        login: ${{ secrets.SONAR_KEY }}
+        projectKey: Test-automation-sample
+        projectName: Test-automation-sample
+        pullrequest.key: ${{ github.event.number }}
+        pullrequest.branch: ${{ github.HEAD_REF }}
+        pullrequest.base: ${{ github.BASE_REF }}
