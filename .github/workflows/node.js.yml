@@ -19,8 +19,8 @@ on:
     types: [opened]
 
   
-  schedule:
-    - cron: '0 09 * * 1-5'
+#   schedule:
+#     - cron: '0 09 * * 1-5'
 
 jobs:
   build:
