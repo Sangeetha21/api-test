@@ -21,9 +21,6 @@ describe("Color Code Converter", function () {
         console.log(this.responseText);
         PublicReportingAPI.setStatusInfo();
         PublicReportingAPI.addAttributes([{ value: 'testAttr2' }]);
-
-
-        // allure.description("this responseText");
       }
     });
     xhr.open("GET", "https://jsonplaceholder.typicode.com/todos/1");
