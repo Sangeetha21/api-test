@@ -9,6 +9,6 @@ jobs:
       uses: pullreminders/label-when-approved-action@master
       env:
         APPROVALS: "2"
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
         ADD_LABEL: "Ready%20To%20Merge"
         REMOVE_LABEL: "awaiting%20review"
